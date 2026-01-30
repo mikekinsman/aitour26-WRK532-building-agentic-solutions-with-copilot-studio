@@ -51,6 +51,8 @@ If you'd like to try this lab on your own:
 3. Clone this repository to get the MCP server and knowledge documents
 4. Start with the [Introduction](./docs/00-Introduction.md)
 
+> **Note:** Some modules may require a paid license to complete on your own. You will also be using your own environment and may incur cloud costs.
+
 #### Viewing the Lab Documentation Locally
 
 This repo uses MkDocs for documentation. To view the docs locally:
@@ -61,8 +63,6 @@ mkdocs serve
 ```
 
 Then open http://localhost:8000 in your browser.
-
-> **Note:** Some modules may require a paid license to complete on your own. You will also be using your own environment and may incur cloud costs.
 
 ### 🔗 Session Resources
 

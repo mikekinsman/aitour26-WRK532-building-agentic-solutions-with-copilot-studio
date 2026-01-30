@@ -67,6 +67,12 @@ Ask the content creator:
 - "Are there data files? Should I create a `/data/` folder?"
 - "Where is your lab content? I'll move it to `/docs/`"
 
+### 2a: Clean Up Legacy Folders
+
+After moving content to `/docs/`, check for legacy folders like `/lab/` or `/lab/instructions/`:
+- If a `/lab/` folder exists and is now empty (or only contains a README that duplicates content in `/docs/`), delete it
+- Search the README and other files for links pointing to the deleted folder and update them to point to `/docs/`
+
 ---
 
 ## Step 3: Clean Up Documentation Content
@@ -214,14 +220,32 @@ Add `### 🏫 Getting Started in a Guided Session`:
 
 Add `### 🏠 Getting Started in Your Own Environment`:
 - Link to trial/account signup
-- Prerequisites to install
+- Prerequisites to install (list them inline, don't link to deleted files)
 - Clone repo instructions
-- Note about licensing and cloud costs
+- Note about licensing and cloud costs (place this right after prerequisites, not at the end)
+- Link to start of lab (e.g., `./docs/00-Introduction.md`)
 
 Ask: "Can customers complete this lab in their own environment?"
 If no, add: "Note: You may be unable to complete all steps in your own environment because [reasons]."
 
-### 6c: Content Owners
+### 6c: MkDocs Instructions for Home Users
+
+Add a subsection explaining how to view the documentation locally:
+
+```markdown
+#### Viewing the Lab Documentation Locally
+
+This repo uses MkDocs for documentation. To view the docs locally:
+
+\`\`\`bash
+pip install mkdocs mkdocs-material
+mkdocs serve
+\`\`\`
+
+Then open http://localhost:8000 in your browser.
+```
+
+### 6d: Content Owners
 
 Update the Content Owners table with names and GitHub usernames.
 
