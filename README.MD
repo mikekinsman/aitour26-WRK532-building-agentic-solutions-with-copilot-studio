@@ -29,6 +29,41 @@ By the end of this session, learners will be able to:
 - Agent Flows
 - MCP
 
+### 🏫 Getting Started in a Guided Session
+
+If you're attending this workshop at **Microsoft AI Tour 2026**:
+
+1. You will be provided with a virtual machine that has all required software pre-installed
+2. Login credentials will be provided by your instructor
+3. Follow along with the [lab instructions](./docs/00-Introduction.md)
+
+The full lab experience is guaranteed at AI Tour events with the provided environment and credentials.
+
+### 🏠 Getting Started in Your Own Environment
+
+If you'd like to try this lab on your own:
+
+1. Sign up for a [Copilot Studio trial](https://aka.ms/copilotstudio-getstarted)
+2. Install the prerequisites:
+   - [Visual Studio Code](https://code.visualstudio.com/download)
+   - [Python](https://www.python.org/downloads/)
+   - [DevTunnels CLI](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows)
+3. Clone this repository to get the MCP server and knowledge documents
+4. Start with the [Introduction](./docs/00-Introduction.md)
+
+#### Viewing the Lab Documentation Locally
+
+This repo uses MkDocs for documentation. To view the docs locally:
+
+```bash
+pip install mkdocs mkdocs-material
+mkdocs serve
+```
+
+Then open http://localhost:8000 in your browser.
+
+> **Note:** Some modules may require a paid license to complete on your own. You will also be using your own environment and may incur cloud costs.
+
 ### 🔗 Session Resources
 
 | Resource | Path |

@@ -1,0 +1,239 @@
+AI Tour 26 Repository Setup Guide
+
+For Content Creators: This guide is designed to help you work with GitHub Copilot to prepare your AI Tour 26 repository for publication. Copilot will ask you questions and help implement the necessary changes to meet all repository requirements.
+
+For Copilot: When a content creator asks you to help prepare their repository, read this entire file and guide them through each step interactively. Ask questions to gather the information you need, then implement the changes. Work through the tasks in order.
+
+CRITICAL RULE FOR COPILOT:
+
+NEVER infer, assume, or add information that the content creator hasn't explicitly provided DO NOT fill in gaps with what you think should be there ALWAYS highlight missing or unclear information and ask the creator about it. You can make suggestions to them about things to add, but only after they approve it. Only work with what is explicitly given to you If something is missing, point it out and ask: "I don't see [X] in your content. Do you want to add it, or should I proceed without it?"
+
+How This Works The content creator will ask you to "help me prepare my repo for publication" or similar You'll read this GUIDANCE.md file to understand what needs to be done You'll work through each step, asking the creator for necessary information You'll implement the changes as you go At the end, you'll help delete this GUIDANCE.md file.
+
+Your first job is to become an expert in the content included in the materials in the repo. Look in the /lab folder for instructions that hte user will follow to complete the lab.  Read all of the instructions and steps and become an expert on what the user is being asked to step through.
+
+Evaluate Home User Requirements
+
+After becoming an expert in the lab content, evaluate it closely from the perspective of someone attempting to complete it on their own (outside of a guided session). Ask yourself:
+
+1. **What features does the lab use?** (e.g., Agent Flows, MCP servers, AI Prompts, premium connectors)
+2. **Can these features be accessed with a trial license, or do some require a paid subscription?**
+3. **Are there any modules or steps that would be blocked for trial users?**
+
+If you're unsure, research the licensing requirements for the specific technologies used. Then work with the content creator to add appropriate notes to the README:
+
+- Be transparent about licensing requirements without being overly specific (licensing details change)
+- Use language like "Some modules may require a paid license to complete on your own"
+- Highlight that the full lab experience is guaranteed at guided sessions with provided credentials
+- Mention any potential cloud costs for home users running their own environments
+
+The goal is to set clear expectations so home users don't get halfway through a lab only to hit a paywall.
+
+Step-by-Step Setup Instructions Work through these steps in order with the content creator:
+
+Step 1: Decide about Documentation
+Creator: Some sessions we've seen in the past could use some help cleaning up and prettifying. The docs folder is the right place to put all the steps that your going to ask customers to walk through.
+
+If its ready and polished you can just paste it into the docs folder as is. If you'd like copilot to see if it can refactor it.
+
+Copilot - CRITICAL INSTRUCTIONS:
+
+DO NOT INFER OR ADD ANY INFORMATION that is not explicitly in the source content DO NOT fill in gaps or make assumptions about what should be included DO HIGHLIGHT anything that appears to be missing or incomplete. DO make suggestions about what could be added. Only transform and reorganize what is actually provided
+
+Ask the content creator:
+
+"Do you have your session content ready?"
+
+If NO: "Let me know when it's ready and I can help you structure it. We should keep GUIDANCE.md until then." If YES: Continue with questions below "Where is your lab content located?"
+
+Check common locations: /docs/, /lab/, rawlab.md, /lab/README.md, or root directory .md files Show the creator what you found: "I found content in [location]. Is it good to go, or Would you like to see what I can do polishing it up? You can always delete what I create without any risk"
+
+If No: Go to step 2.
+
+If Yes: "I'm going to review the content now. I'll only use what's explicitly written - I won't add or infer anything."
+
+Review the content and report back:
+
+"I found [X] exercises/sections in your content" Flag missing elements: "I notice the following might be missing or unclear:" Prerequisites/setup instructions? Expected outcomes for each exercise? Navigation between sections? Any introductory context? Ask: "Should I proceed with just what's here, or do you want to add these missing pieces first?" Only after they confirm, structure the content:
+
+Create folders that match the structure in their content (e.g., /docs/exercises/exercise-1/) Start subfolder numbering at 01 Copy content verbatim - do not paraphrase or embellish Create an index.md landing page with navigation Update the nav: section in mkdocs.yml If student setup instructions exist in the source, create /docs/student-setup/, otherwise skip it
+
+Step 2: Update README.MD Content
+Copilot: You may be able to determine the session code and the session title from the name of the repository, or from the readme. If you can, ask the content creator to confirm your belif. If you can't, just ask them for it:
+
+"What is your session code and title?" (e.g., "BRK123: Building Scalable AI Solutions")
+Update the main heading in README.MD.
+
+"What is your session description? Would you like me to suggest a description?" (2-3 sentences about what the session covers)
+Replace "Add Session Description" section
+
+"What are the 3 main learning outcomes? Would you like me to suggest some?" (What will learners be able to do after completing this session?)
+Come up with some suggestions if asked. Fill in the bullet points under "🧠 Learning Outcomes"
+
+"What technologies are featured in this session? Would you like me to suggest some?" (List the main technologies)
+Come up with some suggestions if asked. Fill in the numbered list under "💻 Technologies Used" IMPORTANT: Use Learn MCP server to identify good links on learn.microsoft.com to share with customers so they can learn more.
+
+what additional resources should we send customers to from your repo?
+Always include a link to this event's Learn page. For build that's "https://aka.ms/learnatbuild", for ignite thats "https://aka.ms/learnatignite" for Aitour, its "https://aka.ms/learnatignite". If there
+
+"Who are the content owners besides you?" (Names and GitHub usernames)
+Update the Content Owners table Remove extra placeholder entries if only one owner Then update the README.MD file with this information and remove the placeholder Ask the content creator for information needed to complete the table. Search on github if necessary or if it would be helpful.
+
+How customers in a guided session get started?
+Copilot: If this is a guided lab or workshop:ask "For customers taking this as a part of a guided session, what steps do they need to take to get started?" If you think you know the answer from reading their content, suggest a possible set of steps for the user.
+
+Fill in the ### 🏫 Getting started in a guided session section.  If its missing, add it.
+
+If this repo is not for a guided lab LAB/PREL or workshop WRK, then remove this section from the readme.
+
+How customers learning on their own get started
+Reminder: we are creating public repositories so customers are able to follow this guidance on their own. We know they were
+
+Fill in the ### 🏠 Getting started in your own environment section.  If its missing, add it.  Make sure the customers know that they will be using their own environments and so will be paying cloud costs to go through these steps themselves.
+
+If this is a guided session, ask the creator "Are customers in their own environment able to take this lab?"
+
+If they say no, ask them why not. Add "Note: you may be unable to follow all of these steps in your own environment because" and complete the sentence with the reasons the creator provided to the readme.
+
+
+
+Step 3: Clean Up Folder Structure
+Please use these standard subfolder names so customers can have a consistent experience: /data if your session includes data that will be procesed during the session /src if your session includes source code to share with customers /docs if your session includes several steps for customers to follow. The majority of your content should be in the docs folder.
+
+Copilot: Ask the content creator about possible sub folders. Remind them that consistency is key for customer experience:
+
+"Are you going to be sharing source code with customers in your session?"
+
+If they say yes, ask them if they'd like you to create an src folder to house it. If they say yes, create it.
+
+Same questions for data and docs folders. Available folders and their purposes:
+
+data/ - for session data files docs/ - for documentation (required for MkDocs)
+
+Step 4: Remove Placeholder Content from /docs
+Check the /docs folder for placeholder content Remove the 01-demo folder if it exists Remove the old README.md file from /docs (it will conflict with index.md for MkDocs) Remove any other placeholder files from /docs/artifacts/
+
+Step 5: Clean Up Skillable/Lab Platform Artifacts
+
+If the lab content was exported from Skillable or another lab hosting platform, search for and clean up these common artifacts. IMPORTANT: Do not make changes automatically. Present findings to the content creator grouped by pattern type and get approval before making changes.
+
+Copilot: Search for ALL patterns below across all docs files first, then present findings to the content creator grouped by type:
+
+1. **`@lab.*` variable references**: Search for `@lab.` in all docs files.
+   
+   Present findings: "I found [X] instances of @lab.* variables across your docs:
+   - @lab.Title (1 instance in 00-Introduction.md)
+   - @lab.CloudCredential references (4 instances across 2 files)
+   - [etc.]
+   
+   I suggest replacing these with:
+   - @lab.Title → The actual session title
+   - @lab.CloudCredential(...).Username/Password → `[Provided by instructor or your own account]`
+   - @lab.VirtualMachine(...) → `[Credentials provided by instructor]`
+   
+   Should I make these replacements?"
+
+2. **`+++text+++` type-text syntax**: Search for `+++` in all docs files.
+   
+   Present findings: "I found [X] instances of +++text+++ Skillable auto-type syntax:
+   - URLs wrapped in +++ (e.g., +++https://example.com+++)
+   - User input values (e.g., +++Zava Order Support+++)
+   - Credentials (already covered above)
+   
+   I suggest:
+   - URLs: Remove +++ markers, make them proper links
+   - User input values: Use bold (**text**) or code (`text`) formatting
+   
+   Should I make these replacements?"
+
+3. **`[!note]`, `[!tip]`, `[!alert]` callouts**: Search for `[!` in all docs files.
+   
+   Present findings: "I found [X] Skillable-style callouts that won't render correctly in MkDocs:
+   - [X] NOTE callouts
+   - [X] TIP callouts  
+   - [X] ALERT/WARNING callouts
+   
+   I suggest converting these to MkDocs admonition syntax:
+   - `> [!NOTE]` → `!!! note`
+   - `> [!TIP]` → `!!! tip`
+   - `> [!ALERT]` → `!!! warning`
+   
+   Should I convert all of these?"
+
+4. **VM-specific paths and instructions**: Search for paths like `D:\`, `C:\LabFiles`, or references to VM desktops.
+   
+   Present findings: "I found [X] references to VM-specific paths or instructions. These may not work for home users. Would you like me to:
+   - Replace with relative paths where possible
+   - Add notes indicating these are for guided sessions only
+   - Provide alternative instructions for home users"
+
+After completing all approved changes, summarize: "I made [X] changes to clean up Skillable artifacts:
+- [X] @lab.* variables replaced
+- [X] +++text+++ syntax cleaned up
+- [X] callouts converted to MkDocs format
+- [X] VM paths addressed"
+
+Step 6: MkDocs Setup and Documentation Structure
+
+When setting up MkDocs for the repository:
+
+1. **Check for an existing landing page**: Before creating a new index.md, check if `/docs/index.md` already exists and whether it's a proper landing page or just copied lab content.
+
+   Ask the content creator: "I found an index.md (or README.md) in the docs folder. Does it contain your landing page content, or is it leftover from a template/copy operation?"
+   
+   Signs it's NOT a proper landing page (and needs to be replaced):
+   - Starts with step-by-step instructions (e.g., "1. Open Microsoft Edge...")
+   - Contains lab credential placeholders
+   - Is very long (hundreds of lines of detailed instructions)
+   - Is identical to one of the lab module files
+   
+   Signs it IS a proper landing page (keep it):
+   - Has a welcome message and session overview
+   - Describes what the user will learn/build
+   - Contains navigation links to the modules
+   - Is relatively short (under 100 lines)
+
+2. **Create a proper landing page if needed**: The `/docs/index.md` file should be a welcoming overview page, NOT the lab instructions themselves. A good index.md includes:
+   - Workshop/session title and welcome message
+   - Overview of what the session covers
+   - What the user will build (brief scenario description)
+   - Learning outcomes
+   - Technologies used
+   - Navigation links to the lab modules
+
+3. **Do not use README.md as the home page**: MkDocs works best with `index.md`. If you copy content from a `/lab/` folder, make sure to remove or replace any `README.md` that contains duplicate lab instructions.
+
+4. **Update mkdocs.yml metadata**: Replace all placeholder values:
+   - `site_name`: Session code and title (e.g., "WRK532: Building Agentic Solutions with Copilot Studio")
+   - `site_url`: The GitHub Pages URL for this repo
+   - `site_author`: Content owner names
+   - `site_description`: Brief description starting with "Documentation for [session code]..."
+   - `repo_name` and `repo_url`: Update to match the actual repository
+
+5. **Configure navigation**: The nav section should have:
+   - Home pointing to `index.md`
+   - A Lab section (or similar) with each module listed in order
+
+6. **Verify assets exist**: Check that all referenced assets are in place:
+   - `docs/overrides/` folder (for theme customization)
+   - Logo file referenced in theme config
+   - CSS file referenced in `extra_css`
+
+7. **Test the build**: Run `mkdocs build` to verify there are no errors before committing. Run `mkdocs serve` to preview and check that:
+   - All lab content is accessible from the navigation
+   - The home page shows the landing page, not lab instructions
+   - All links work correctly
+
+Step 7: Update GitHub Repo Settings (Manual Step)
+Remimd the creator that they'll have to complete this step: Have them Click the gear icon ⚙️ in the upper right of the GitHub repo Set a good description of this repo. Suggest a description from earlier. Add technology tags (same items from Technologies Used section). Suggestion the tags from the Technologies Used section.
+
+As the content creator if they've completed the repo settings step.
+
+Step 9: Slides and Recordings
+Do NOT store slides or recordings in this repo. Links to slides and recordings can be provided, but do not host the actual files or recordings in the repo.
+
+We will implement a similar solution to last year's with Azure blob storage When the time comes, link to these from the readme
+
+Step 10: Final Step - Delete GUIDANCE.md Copilot: Before deleting this file, verify with the content creator:
+
+Show a summary of everything completed Ask: "Are you satisfied with all the changes? Should I delete GUIDANCE.md now, or would you like to review anything first?" If they confirm, delete this file with rm GUIDANCE.md Remind them: "Don't forget to update the GitHub repository settings (description and tags) through the repository settings page" Questions? If you encounter issues or need clarification as a content creator, surface through your content lead or ping Mike Kinsman on teams.

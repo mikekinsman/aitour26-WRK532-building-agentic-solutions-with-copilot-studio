@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+         <loc>https://microsoft.github.io/aitour26-WRK532-building-agentic-solutions-with-copilot-studio/</loc>
+         <lastmod>2026-01-30</lastmod>
+    </url>
+    <url>
+         <loc>https://microsoft.github.io/aitour26-WRK532-building-agentic-solutions-with-copilot-studio/00-Introduction/</loc>
+         <lastmod>2026-01-30</lastmod>
+    </url>
+    <url>
+         <loc>https://microsoft.github.io/aitour26-WRK532-building-agentic-solutions-with-copilot-studio/01-Build-Your-Agent/</loc>
+         <lastmod>2026-01-30</lastmod>
+    </url>
+    <url>
+         <loc>https://microsoft.github.io/aitour26-WRK532-building-agentic-solutions-with-copilot-studio/02-Connect-To-An-MCP-Server/</loc>
+         <lastmod>2026-01-30</lastmod>
+    </url>
+    <url>
+         <loc>https://microsoft.github.io/aitour26-WRK532-building-agentic-solutions-with-copilot-studio/03-Add-A-Prompt-For-Warranty-Claim-Processing/</loc>
+         <lastmod>2026-01-30</lastmod>
+    </url>
+    <url>
+         <loc>https://microsoft.github.io/aitour26-WRK532-building-agentic-solutions-with-copilot-studio/04-Add-An-Agent-Flow-For-Approving-Warranty-Claims/</loc>
+         <lastmod>2026-01-30</lastmod>
+    </url>
+    <url>
+         <loc>https://microsoft.github.io/aitour26-WRK532-building-agentic-solutions-with-copilot-studio/05-Test-Your-Agent/</loc>
+         <lastmod>2026-01-30</lastmod>
+    </url>
+</urlset>

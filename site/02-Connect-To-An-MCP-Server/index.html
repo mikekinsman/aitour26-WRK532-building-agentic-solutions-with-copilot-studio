@@ -1,0 +1,1363 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentation for WRK532: Building Agentic Solutions with Copilot Studio - A hands-on workshop at Microsoft AI Tour 2026">
+      
+      
+        <meta name="author" content="April Dunnam, Daniel Laskewitz">
+      
+      
+        <link rel="canonical" href="https://microsoft.github.io/aitour26-WRK532-building-agentic-solutions-with-copilot-studio/02-Connect-To-An-MCP-Server/">
+      
+      
+        <link rel="prev" href="../01-Build-Your-Agent/">
+      
+      
+        <link rel="next" href="../03-Add-A-Prompt-For-Warranty-Claim-Processing/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Connect To An MCP Server - WRK532: Building Agentic Solutions with Copilot Studio</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  
+  <style>
+    /* Replace the entire navigation background with the gradient in both light and dark modes */
+    .md-header {
+      background-image: linear-gradient(90deg, 
+        #30216F 0%,     /* Deep Purple */
+        #7C4ACD 20%,    /* Medium Purple */
+        #E94BBF 40%,    /* Vibrant Magenta/Pink */
+        #F2A1E6 60%,    /* Light Pink */
+        #2B76E5 100%    /* Electric Blue */
+      ) !important;
+      /* Override any theme color */
+      background-color: transparent !important;
+    }
+    
+    /* Ensure text is visible on the gradient background */
+    .md-header, .md-header a, .md-header .md-header__button {
+      color: white !important;
+    }
+    
+    /* Make header tabs more visible */
+    .md-tabs {
+      background-color: rgba(0, 0, 0, 0.2) !important;
+    }
+  </style>
+
+  <!-- Place this tag in your head or just before your close body tag. -->
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#2-connect-to-an-mcp-server" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="WRK532: Building Agentic Solutions with Copilot Studio" class="md-header__button md-logo" aria-label="WRK532: Building Agentic Solutions with Copilot Studio" data-md-component="logo">
+      
+  <img src="../assets/msignite-white.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            WRK532: Building Agentic Solutions with Copilot Studio
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Connect To An MCP Server
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9zM20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12zm-9.15 3.96h2.3L12 9z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="pink"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 2c-1.82 0-3.53.5-5 1.35C8 5.08 10 8.3 10 12s-2 6.92-5 8.65C6.47 21.5 8.18 22 10 22a10 10 0 0 0 10-10A10 10 0 0 0 10 2"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="green" data-md-color-accent="cyan"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/microsoft/aitour26-WRK532-building-agentic-solutions-with-copilot-studio" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    microsoft/aitour26-WRK532-building-agentic-solutions-with-copilot-studio
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../00-Introduction/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Lab
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="WRK532: Building Agentic Solutions with Copilot Studio" class="md-nav__button md-logo" aria-label="WRK532: Building Agentic Solutions with Copilot Studio" data-md-component="logo">
+      
+  <img src="../assets/msignite-white.png" alt="logo">
+
+    </a>
+    WRK532: Building Agentic Solutions with Copilot Studio
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/microsoft/aitour26-WRK532-building-agentic-solutions-with-copilot-studio" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    microsoft/aitour26-WRK532-building-agentic-solutions-with-copilot-studio
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lab
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Lab
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../00-Introduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-Build-Your-Agent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Build Your Agent
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Connect To An MCP Server
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Connect To An MCP Server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-the-benefit-of-an-mcp-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What is the benefit of an MCP Server?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#open-the-mcp-server-in-visual-studio-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Open the MCP Server in Visual Studio Code
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#explore-the-zava-inventory-management-mcp-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Explore the Zava Inventory Management MCP Server
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Explore the Zava Inventory Management MCP Server">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#source-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Source files
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Data files
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#install-dependencies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Install dependencies
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#run-the-mcp-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Run the MCP Server
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configure-a-dev-tunnel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configure a dev tunnel
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#add-the-mcp-server-in-microsoft-copilot-studio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Add the MCP Server in Microsoft Copilot Studio
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-Add-A-Prompt-For-Warranty-Claim-Processing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Add A Prompt For Warranty Claim Processing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-Add-An-Agent-Flow-For-Approving-Warranty-Claims/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Add An Agent Flow For Approving Warranty Claims
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-Test-Your-Agent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Test Your Agent
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-the-benefit-of-an-mcp-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What is the benefit of an MCP Server?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#open-the-mcp-server-in-visual-studio-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Open the MCP Server in Visual Studio Code
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#explore-the-zava-inventory-management-mcp-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Explore the Zava Inventory Management MCP Server
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Explore the Zava Inventory Management MCP Server">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#source-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Source files
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Data files
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#install-dependencies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Install dependencies
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#run-the-mcp-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Run the MCP Server
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configure-a-dev-tunnel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configure a dev tunnel
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#add-the-mcp-server-in-microsoft-copilot-studio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Add the MCP Server in Microsoft Copilot Studio
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href=".." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Home
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../00-Introduction/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Lab
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="2-connect-to-an-mcp-server">2 - Connect to an MCP Server<a class="headerlink" href="#2-connect-to-an-mcp-server" title="Permanent link">&para;</a></h1>
+<p>In this part, you will learn about how to run a Model Context Protocol (MCP) server and how to connect it to Microsoft Copilot Studio. Zava has created an MCP server for inventory management that provides tools for managing products (like get_products and add_product), stores (such as get_stores and add_store), and inventory operations (including list_inventory_by_store). The MCP server is available on <strong>D:\LabFiles\ZavaInventoryMCP</strong>.</p>
+<h2 id="what-is-the-benefit-of-an-mcp-server">What is the benefit of an MCP Server?<a class="headerlink" href="#what-is-the-benefit-of-an-mcp-server" title="Permanent link">&para;</a></h2>
+<p>Model Context Protocol (MCP) servers provide a standardized way to connect AI agents to various data sources and tools, offering several key benefits:</p>
+<p><strong>Simplified Integration</strong>: MCP servers act as a bridge between your AI agent and backend systems, eliminating the need to build custom integrations for each data source. Instead of creating multiple point-to-point connections, you can use a single protocol to access different systems.</p>
+<p><strong>Reusability</strong>: Once you create an MCP server, it can be used across multiple agents and applications. The Zava Inventory MCP server you'll work with in this lab can be shared with any agent that needs inventory management capabilities.</p>
+<p><strong>Contextual Intelligence</strong>: MCP servers provide structured access to relevant context and tools, allowing AI agents to make informed decisions and take actions. For example, the Zava Inventory MCP server provides tools for querying products, managing stores, and tracking inventory - giving the agent everything it needs to handle inventory-related tasks.</p>
+<p><strong>Security and Control</strong>: MCP servers can implement authentication and authorization, ensuring that agents only access data and perform actions they're permitted to. This centralized approach makes it easier to maintain security policies across your AI applications.</p>
+<p><strong>Flexibility</strong>: MCP servers can expose multiple tools and capabilities in one place. As you'll see, the Zava Inventory MCP server provides tools for products, stores, and inventory operations - all accessible through a single connection.</p>
+<p>By using MCP servers, you can build more capable agents faster while maintaining better control over how they interact with your business systems.</p>
+<h2 id="open-the-mcp-server-in-visual-studio-code">Open the MCP Server in Visual Studio Code<a class="headerlink" href="#open-the-mcp-server-in-visual-studio-code" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Open Visual Studio Code by selecting Visual Studio Code in the taskbar</li>
+<li>It should automatically have the Zava InventoryMCP Server Folder open. If you don't see the folder open, follow these steps to open the folder:<ol>
+<li>Select <strong>File &gt; Open Folder</strong></li>
+<li>Navigate to <strong>D:\LabFiles\ZavaInventoryMCP</strong></li>
+<li>Select <strong>Select Folder</strong></li>
+<li>You might see a pop up where you will be asked to trust the authors of the files in this folder. Make sure to select <strong>Yes, I trust the authors</strong>
+    <img alt="Trust authors" src="../assets/TrustAuthors.png" /></li>
+</ol>
+</li>
+</ol>
+<p>This will open the Zava Inventory Management MCP server in Visual Studio Code. Let's explore the MCP Server to see what files are in there.</p>
+<h2 id="explore-the-zava-inventory-management-mcp-server">Explore the Zava Inventory Management MCP Server<a class="headerlink" href="#explore-the-zava-inventory-management-mcp-server" title="Permanent link">&para;</a></h2>
+<p>The MCP server folder contains several key files that make up the MCP Server:</p>
+<h3 id="source-files">Source files<a class="headerlink" href="#source-files" title="Permanent link">&para;</a></h3>
+<p>Expand the <strong>src</strong> folder in the <strong>Explorer</strong> section on the left hand side and browse the source files.</p>
+<ul>
+<li><strong>src/server.py</strong>: The main MCP server implementation with all tools for products, stores, and inventory</li>
+<li><strong>src/helpers.py</strong>: Utility functions for data loading and JSON file operations</li>
+<li><strong>src/middleware.py</strong>: Authentication middleware for API key validation</li>
+<li><strong>src/requirements.txt</strong>: Python dependencies needed to run the server</li>
+</ul>
+<h3 id="data-files">Data files<a class="headerlink" href="#data-files" title="Permanent link">&para;</a></h3>
+<p>Expand the <strong>Data</strong> folder to see what's in this folder.</p>
+<ul>
+<li><strong>data/products.json</strong>: Sample product data with products</li>
+<li><strong>data/stores.json</strong>: Sample store data with store locations</li>
+<li><strong>data/inventory.json</strong>: Sample inventory records with stock entries</li>
+</ul>
+<p>Make sure to look around in these files to see what's going on in the server. Now, let's install the dependencies so that we can run the server locally.</p>
+<h2 id="install-dependencies">Install dependencies<a class="headerlink" href="#install-dependencies" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Open the terminal by selecting <strong>Terminal &gt; New Terminal</strong></li>
+<li>Make sure you are in the following folder: <strong>D:\LabFiles\ZavaInventoryMCP</strong></li>
+<li>
+<p>Create a new virtual environment by running the following command (press <strong>Enter</strong> after pasting in the terminal to run it):</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>python<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>.venv
+</code></pre></div></td></tr></table></div>
+</li>
+<li>
+<p>Now, you need to activate the virtual environment. Run the following command to do that.</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>.venv<span class="se">\S</span>cripts<span class="se">\a</span>ctivate
+</code></pre></div></td></tr></table></div>
+</li>
+<li>
+<p>Install all dependencies by running the command below. It might take a while, so wait a little while until it's finished.</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>src/requirements.txt
+</code></pre></div></td></tr></table></div>
+</li>
+</ol>
+<h2 id="run-the-mcp-server">Run the MCP Server<a class="headerlink" href="#run-the-mcp-server" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<p>Now it's time to run the MCP Server. Use the following command to start the Zava Inventory MCP Server.</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>python<span class="w"> </span>src/server.py
+</code></pre></div></td></tr></table></div>
+</li>
+</ol>
+<p>After running the MCP Server, you're not there yet. The MCP Server is only running locally right now, so you need to make sure the MCP Server is available through a public URL. This is a requirement for Microsoft Copilot Studio. Because it's a cloud service, it's not able to reach your localhost.</p>
+<h2 id="configure-a-dev-tunnel">Configure a dev tunnel<a class="headerlink" href="#configure-a-dev-tunnel" title="Permanent link">&para;</a></h2>
+<p>To make sure we can reach the MCP Server from Microsoft Copilot Studio, we'll add a dev tunnel. During these steps, you will be prompted to log in. Use the Entra ID account from this workshop when you are prompted to log in.</p>
+<blockquote>
+<p>[!Note] A dev tunnel creates a secure connection that exposes your local development server to the internet through a public URL. This allows cloud services like Copilot Studio to access your locally running MCP server. We use this to test that the MCP Server is working but if you want to use this in production you would deploy the MCP server.</p>
+</blockquote>
+<p>In the terminal at the bottom of Visual Studio Code, we are going to configure a dev tunnel.</p>
+<ol>
+<li>
+<p>Select the <strong>+</strong> in the top right corner of the terminal</p>
+<p><img alt="Add terminal" src="../assets/AddTerminal.png" /></p>
+<p>This will open a new terminal, so that we don't stop our running server.</p>
+</li>
+<li>
+<p>Run the following command to login to the dev tunnel service</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>devtunnel<span class="w"> </span>login
+</code></pre></div></td></tr></table></div>
+</li>
+<li>
+<p>In the pop-up that will appear, select <strong>Work or School account</strong> and select <strong>Continue</strong></p>
+<p><img alt="Work or School Account" src="../assets/MCP_WorkSchoolAccount.png" /></p>
+</li>
+<li>
+<p>Log in with:</p>
+<p><!-- markdownlint-disable-next-line MD034 -->
+<strong>Username:</strong> +++@lab.CloudCredential(CSBatch1).Username+++</p>
+<p><!-- markdownlint-disable-next-line MD034 -->
+<strong>Password:</strong> +++@lab.CloudCredential(CSBatch1).Password+++</p>
+</li>
+<li>
+<p>In the next screen where it asks if you want to automatically sign into all desktop apps on this device, select <strong>No, this app only</strong></p>
+<p><img alt="Sign In Apps" src="../assets/SignInApps.png" /></p>
+</li>
+<li>
+<p>Run the following command to create the devtunnel:</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>devtunnel<span class="w"> </span>create<span class="w"> </span>-a
+</code></pre></div></td></tr></table></div>
+</li>
+</ol>
+<!-- markdownlint-disable-next-line MD033 -->
+<ol>
+<li>
+<p>Run the following command to open port 3000 for the dev tunnel:</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>devtunnel<span class="w"> </span>port<span class="w"> </span>create<span class="w"> </span>-p<span class="w"> </span><span class="m">3000</span>
+</code></pre></div></td></tr></table></div>
+</li>
+</ol>
+<!-- markdownlint-disable-next-line MD033 -->
+<ol>
+<li>
+<p>Run the following command to host the dev tunnel:</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>devtunnel<span class="w"> </span>host
+</code></pre></div></td></tr></table></div>
+<p>This will give you the following message:  </p>
+<blockquote>
+<p>[!NOTE]
+Connect via browser: <a href="https://x.devtunnels.ms:3000">https://x.devtunnels.ms:3000</a>, <a href="https://x-3000.x.devtunnels.ms">https://x-3000.x.devtunnels.ms</a></p>
+<p>Inspect network activity: <a href="https://x-3000-inspect.x.devtunnels.ms">https://x-3000-inspect.x.devtunnels.ms</a>
+Ready to accept connections for tunnel: x.x</p>
+</blockquote>
+<p><img alt="MCP" src="../assets/MCP_ChooseDevTunnel.png" /></p>
+<!-- markdownlint-disable-next-line MD033 -->
+<blockquote>
+<p>[!Alert] It's very important to select the URL that looks like this: https<nolink>://x-3000.x.devtunnels.ms</p>
+<p>DO NOT USE the other URL (with <em>:3000</em> in the URL) will give you errors later on.</p>
+</blockquote>
+</li>
+<li>
+<p>Open the second URL after connect via browser by using <strong>ctrl + click</strong></p>
+<p>Now your browser will be opened and you will see a warning like this:</p>
+<p><img alt="Dev Tunnel Continue" src="../assets/DevTunnelContinue.png" /></p>
+</li>
+<li>
+<p>Select <strong>Continue</strong></p>
+<p>Now, the following message should be displayed:  </p>
+<p>The Zava Inventory 📦 MCP Server 🧠 is running</p>
+</li>
+<li>
+<p>In the address bar, add <code>/mcp</code> behind the address and hit <strong>Enter</strong></p>
+<p>Now your browser will display an error, because in the browser we didn't add the API Key.<br />
+🔒 Authentication Failed ⛔</p>
+</li>
+</ol>
+<p>We are going to fix this error in the next steps.</p>
+<h2 id="add-the-mcp-server-in-microsoft-copilot-studio">Add the MCP Server in Microsoft Copilot Studio<a class="headerlink" href="#add-the-mcp-server-in-microsoft-copilot-studio" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<p>Select Microsoft Edge to go back to your agent in Copilot Studio.</p>
+<p><img alt="Edge" src="../assets/Edge.png" /></p>
+</li>
+<li>
+<p>Select the <strong>Tools</strong> tab in the top navigation of your agent. If you don't see it, select the <strong>+7</strong> button in the navigation then select <strong>Tools</strong>.  DO NOT select the Tools option in the left navigation.</p>
+<p><img alt="Overview" src="../assets/ToolsTabSelect.png" /></p>
+</li>
+<li>
+<p>Select <strong>+ Add a tool</strong></p>
+<p><img alt="Add Tool" src="../assets/AddTool1.png" /></p>
+</li>
+<li>
+<p>Select <strong>+ New tool</strong></p>
+<p><img alt="New Tool" src="../assets/NewTool2.png" /></p>
+</li>
+<li>
+<p>Select <strong>Model Context Protocol</strong></p>
+<p><img alt="New Tool MCP" src="../assets/ToolMCP.png" /></p>
+</li>
+<li>
+<p>Enter the <strong>Name</strong>:</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>Zava Inventory MCP
+</code></pre></div></td></tr></table></div>
+</li>
+<li>
+<p>Enter the <strong>Description</strong>:</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>MCP server that provides tools for managing Zava&#39;s product inventory, store locations, and stock operations across multiple retail locations.
+</code></pre></div></td></tr></table></div>
+</li>
+<li>
+<p>Enter the <strong>Server URL</strong>. This should be the URL you opened earlier during the devtunnel steps without the <em>https://</em> in front of it and with the <em>/mcp</em> behind it. For example: <em>x-3000.x.devtunnels.ms/mcp</em>.</p>
+</li>
+<li>For <em>Authentication</em>, select <strong>API key</strong></li>
+<li>
+<p>Leave the <em>type</em> on <em>Header</em> and for <em>Header name</em> add the following value:</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>authorization
+</code></pre></div></td></tr></table></div>
+<p><img alt="Create MCP Tool" src="../assets/CreateMCPTool.png" /></p>
+</li>
+<li>
+<p>Check if all the values are correct and if so, select <strong>Create</strong> to add the MCP Server</p>
+<p>This will take a while, since in the background it is creating a custom connector for the MCP Server.</p>
+</li>
+<li>
+<p>When it's done, select <strong>Not connected</strong> and <strong>Create new connection</strong></p>
+<p><img alt="MCP Connection" src="../assets/MCPConnection.png" /></p>
+</li>
+<li>
+<p>Enter the <strong>API Key</strong>:</p>
+<p><code>text
+AITour2026!</code></p>
+</li>
+<li>
+<p>Select <strong>Create</strong></p>
+<p><img alt="Create Connection" src="../assets/MCPCreateConnection.png" /></p>
+</li>
+<li>
+<p>Select <strong>Add and configure</strong></p>
+<p><img alt="Add to agent" src="../assets/AddToAgent.png" /></p>
+<p>Now it's time to test the agent with the MCP Server!</p>
+</li>
+<li>
+<p>Select the <strong>Expand Test Pane</strong> icon in the top right corner of the <em>Test your agent</em> panel. This will help you understand what is happening when you are sending and receiving messages in the <em>Test your agent</em> panel.</p>
+<p><img alt="Expand Test Pane" src="../assets/ExpandTestPanel.png" /></p>
+</li>
+<li>
+<p>Now, enter the following message and send it in the <em>Test your agent</em> panel:</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>List the Zava Stores
+</code></pre></div></td></tr></table></div>
+<blockquote>
+<p>[!NOTE]
+The test pane is made to verify your agent is working from a user point of view. We added a connection when we added the MCP Server as a tool, but that one is not connected to the test pane yet.</p>
+</blockquote>
+</li>
+<li>
+<p>Select the <strong>Open connection manager</strong> link</p>
+<p><img alt="Open Connection Manager" src="../assets/OpenConnectionManager.png" /></p>
+</li>
+<li>
+<p>Next, in the <em>Manage your connections</em> screen, select <strong>Connect</strong> next to the <em>Zava Inventory MCP</em> tool</p>
+<p><img alt="Connect to Zava Inventory MCP" src="../assets/ConnectionManagerConnect.png" /></p>
+</li>
+<li>
+<p>This should open the <em>Create or pick a connection</em> screen and it will automatically use the connection you created before. Select <strong>Submit</strong> to confirm the connection</p>
+<p><img alt="Create or pick a connection" src="../assets/ConnectionManagerPickConnection.png" /></p>
+</li>
+<li>
+<p>Next you should see the <em>Manage your connections</em> screen again, but now the status should show <em>Connected</em>. Close the <em>Manage your connections</em> screen and go back to the <em>Test your agent</em> section</p>
+</li>
+<li>
+<p>Select the <strong>Retry</strong> button</p>
+<p><img alt="Retry" src="../assets/ConnectionManagerRetry.png" /></p>
+<p>After this, the agent should show you a whole bunch of Zava Stores as an answer in the <em>Test your agent</em> panel:</p>
+<p><img alt="List Zava Stores test pane" src="../assets/ListZavaStores.png" /></p>
+<p>And on the left in the <em>Test your agent</em> panel, you can see that the Zava Inventory MCP has been initialized and the <em>get_stores</em> tool has been triggered by our message. When you click on the <em>get_stores</em> tool, you're even able to see the output that the agent got from the MCP server. This means our agent made that text into the formatted output we saw in the <em>Test your agent</em> panel.</p>
+<p><img alt="Test Panel after asking to list the Zava Stores." src="../assets/ListZavaStoresTestPanel.png" /></p>
+<p>Let's experiment a bit more with the other tools as well.</p>
+</li>
+<li>
+<p>Send the following message to your agent via the <em>Test your agent</em> panel:</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>List the available products in the Zava Amsterdam store
+</code></pre></div></td></tr></table></div>
+<p>You will see the available products in the Zava Amsterdam store in the <em>Test your agent</em> panel:</p>
+<p><img alt="List Available Products in the Zava Amsterdam store in the test pane" src="../assets/ListAvailableProductsZavaAmsterdamResults.png" /></p>
+<p>Now you can see in the <em>Test Panel</em> more tools have been triggered. The <em>get_stores</em> tool has been triggered again, because it needs it for the <em>list_inventory_by_store</em> tool. This really shows the power of MCP: when used correctly, it can do a lot of calls for you, without having to build a flow for it or to give it more instructions.</p>
+<p><img alt="Test Panel after asking to list the available products in the Zava Amsterdam store." src="../assets/ListAvailableProductsZavaAmsterdamTestPanel.png" /></p>
+<p>But now - we only did get actions, wouldn't it be good to also add something?</p>
+</li>
+<li>
+<p>Select the <strong>New Test Session</strong> button in the <em>Test your agent</em> panel:</p>
+<p><img alt="New Test Session" src="../assets/NewTestSession.png" /></p>
+</li>
+<li>
+<p>After that, send the following message in the <em>Test your agent</em> panel:</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code>Please add the following Zava Store:
+Zava San Francisco
+2481 Mission Terrace, San Francisco, CA 94131
+</code></pre></div></td></tr></table></div>
+<p><img alt="Add Zava store via message" src="../assets/AddZavaStoreNewTestSession.png" /></p>
+<p>As you can see, we didn't add United States to the message, but it automatically added that based on the details in the message.</p>
+<p><img alt="Add Zava store Test Panel" src="../assets/AddZavaStoreActivityMapTestYourAgent.png" /></p>
+</li>
+</ol>
+<p>If you want to check if the store really got added, you can go back to Visual Studio Code and go to <strong>Data</strong> &gt; <strong>stores.json</strong> and look at the bottom of that file. You should see the store there!</p>
+<p><img alt="Store added VS Code" src="../assets/StoreAddedVSCode.png" /></p>
+<p>This section was to help you understand how to use MCP in a Copilot Studio agent. If you have time left at the end of this workshop, feel free to play around with the other tools in the MCP Server.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../01-Build-Your-Agent/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Build Your Agent">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Build Your Agent
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../03-Add-A-Prompt-For-Warranty-Claim-Processing/" class="md-footer__link md-footer__link--next" aria-label="Next: Add A Prompt For Warranty Claim Processing">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Add A Prompt For Warranty Claim Processing
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2023 - present Microsoft
+
+    </div>
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.instant", "navigation.expand", "navigation.instant.progress", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.path", "navigation.indexes", "navigation.top", "toc.follow", "navigation.footer", "content.code.copy", "content.tabs.link"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
